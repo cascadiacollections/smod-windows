@@ -49,7 +49,7 @@ namespace SModr
                 }
 
                 episodes.Add(feedItem);
-                BasicGridView.ItemsSource = episodes.ToArray();
+                BasicGridView.ItemsSource = episodes;
             }
         }
 
