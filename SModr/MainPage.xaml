@@ -12,7 +12,6 @@
             x:Name="mediaPlayer"
             AutoPlay="True"
             AreTransportControlsEnabled="True"
-            PosterSource="https://i1.sndcdn.com/avatars-000375494753-odz2eo-original.jpg"
             Height="97"
             Stretch="UniformToFill"/>
 
@@ -42,7 +41,7 @@
                             TextWrapping="Wrap"
                             MaxLines="1"
                             Padding="0,4,8,4"/>
-                        
+
                         <TextBlock
                             Text="{x:Bind Description}"
                             Foreground="White"

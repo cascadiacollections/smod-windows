@@ -4,18 +4,14 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Windows.Media.Core;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
 using Windows.Web.Syndication;
 
 namespace SModr
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class MainPage : Page
     {
-        private const string FEED_URL = "https://feeds.feedburner.com/SModcasts";
-        private readonly SyndicationFeed Feed;
-        private readonly SyndicationClient Client = new SyndicationClient();
+        private static readonly SyndicationClient Client = new SyndicationClient();
 
         private static string StripHtml(string input)
         {
@@ -25,10 +21,29 @@ namespace SModr
         public MainPage()
         {
             InitializeComponent();
-            this.DataContext = this;
+            DataContext = this;
+        }
 
-            var task = Task.Run(async () => await GetFeedAsync(FEED_URL).ConfigureAwait(false));
-            Feed = task.Result;
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            var channel = e?.Parameter as Channel;
+            var episodes = Fetch(channel.Url);
+
+            BasicGridView.ItemsSource = episodes;
+
+            base.OnNavigatedTo(e);
+        }
+
+        private static async Task<SyndicationFeed> GetFeedAsync(string feedUri)
+        {
+            var uri = new Uri(feedUri);
+
+            return await Client.RetrieveFeedAsync(uri);
+        }
+
+        private static IList<FeedItem> Fetch(string uri)
+        {
+            var Feed = Task.Run(async () => await GetFeedAsync(uri).ConfigureAwait(false)).Result;
             var episodes = new List<FeedItem>(Feed.Items.Count);
 
             foreach (var item in Feed.Items)
@@ -49,20 +64,15 @@ namespace SModr
                 }
 
                 episodes.Add(feedItem);
-                BasicGridView.ItemsSource = episodes;
             }
-        }
 
-        private async Task<SyndicationFeed> GetFeedAsync(string feedUri)
-        {
-            var uri = new Uri(feedUri);
-
-            return await Client.RetrieveFeedAsync(uri);
+            return episodes;
         }
 
         private void BasicGridView_ItemClick(object _, ItemClickEventArgs e)
         {
-            var item = (FeedItem) e.ClickedItem;
+            var item = e.ClickedItem as FeedItem;
+
             SetMediaSource(item.EnclosureUri);
         }
 
@@ -71,11 +81,10 @@ namespace SModr
             try
             {
                 var pathUri = new Uri(url);
+
                 mediaPlayer.Source = MediaSource.CreateFromUri(pathUri);
             }
-#pragma warning disable CS0168 // Variable is declared but never used
-            catch (FormatException _)
-#pragma warning restore CS0168 // Variable is declared but never used
+            catch (FormatException)
             {
                 
             }
