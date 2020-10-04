@@ -17,4 +17,4 @@ jobs:
         uses: microsoft/setup-msbuild@v1.0.1
 
       - name: msbuild
-        run: msbuild
+        run: msbuild -Restore
