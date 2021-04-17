@@ -19,7 +19,7 @@ namespace SModr
 
         private static string StripHtml(string input)
         {
-            return Regex.Replace(input, "<.*?>", String.Empty);
+            return Regex.Replace(input, "<.*?>", string.Empty);
         }
 
         public MainPage()
