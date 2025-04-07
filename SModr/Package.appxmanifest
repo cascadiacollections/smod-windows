@@ -8,7 +8,7 @@
 
   <Identity
     Name="40739KevinCoughlin.SMod"
-    Publisher="CN=AC6B41A6-C0F1-49DD-8E12-5A2001C77230"
+    Publisher="CN=cascadiacollections"
     Version="1.0.0.0" />
 
   <mp:PhoneIdentity PhoneProductId="02d404fa-b4c4-4649-86b4-5111fa4079fd" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>

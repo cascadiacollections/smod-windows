@@ -27,7 +27,6 @@
                 <DataTemplate x:DataType="local:FeedItem">
                     <StackPanel>
                         <TextBlock
-                            x:Name="Title"
                             Text="{x:Bind Title}"
                             Foreground="White"
                             FontSize="14"
@@ -35,14 +34,13 @@
                             Padding="0,4,8,4"/>
 
                         <TextBlock
-                            x:Name="PubDate"
                             Text="{x:Bind PubDate}"
                             Foreground="White"
                             FontSize="12"
                             TextWrapping="Wrap"
                             MaxLines="1"
                             Padding="0,4,8,4"/>
-                        
+
                         <TextBlock
                             Text="{x:Bind Description}"
                             Foreground="White"

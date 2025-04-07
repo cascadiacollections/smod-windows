@@ -40,11 +40,11 @@ namespace SModr
                     PubDate = item.PublishedDate.ToString()
                 };
 
-                foreach (var extension in item.ElementExtensions)
+                foreach (var link in item.Links)
                 {
-                    if (extension.NodeName.Equals("origEnclosureLink", StringComparison.OrdinalIgnoreCase))
+                    if (link.Relationship.Equals("enclosure", StringComparison.OrdinalIgnoreCase))
                     {
-                        feedItem.EnclosureUri = extension.NodeValue.ToString().Replace("http://", "https://", StringComparison.OrdinalIgnoreCase);
+                        feedItem.EnclosureUri = link.Uri.ToString().Replace("http://", "https://", StringComparison.OrdinalIgnoreCase);
                     }
                 }
 
