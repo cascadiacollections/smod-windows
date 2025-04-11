@@ -11,7 +11,8 @@ using Windows.UI.Xaml.Navigation;
 namespace SModr
 {
     /// <summary>
-    /// Provides application-specific behavior to supplement the default Application class.
+    /// The App class initializes the application and handles its launch and suspension events. It sets up the main
+    /// navigation frame and manages the app's lifecycle.
     /// </summary>
     sealed partial class App : Application
     {
@@ -61,12 +62,17 @@ namespace SModr
                     // parameter
                     rootFrame.Navigate(typeof(MainPage), e.Arguments);
                 }
+
+                // Hide the title bar
+                var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
+                coreTitleBar.ExtendViewIntoTitleBar = true;
+
+                var appTitleBar = ApplicationView.GetForCurrentView().TitleBar;
+                appTitleBar.ButtonBackgroundColor = Colors.Transparent;
+                appTitleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
+
                 // Ensure the current window is active
                 Window.Current.Activate();
-
-                // @todo: clean-up / default
-                var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
-                coreTitleBar.ExtendViewIntoTitleBar = false;
             }
         }
 

@@ -4,53 +4,64 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:media="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:local="using:SModr"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="using:SModr"
     mc:Ignorable="d">
 
-    <StackPanel>
-        <MediaPlayerElement
-            x:Name="mediaPlayer"
-            AutoPlay="True"
-            AreTransportControlsEnabled="True"
-            PosterSource="https://i1.sndcdn.com/avatars-000375494753-odz2eo-original.jpg"
-            Height="97"
-            Stretch="UniformToFill"/>
+    <!-- Apply Acrylic Effect -->
+    <Grid>
+        <Grid.Background>
+            <AcrylicBrush
+                BackgroundSource="HostBackdrop"
+                TintColor="#99000000"
+                TintOpacity="0.8"
+                FallbackColor="Black" />
+        </Grid.Background>
 
-        <ListView
-            x:Name="BasicGridView"
-            IsItemClickEnabled="True"
-            SelectionMode="Single"
-            ItemClick="BasicGridView_ItemClick"
-            Width="Auto">
+        <StackPanel>
+            <ListView
+                x:Name="BasicGridView"
+                IsItemClickEnabled="True"
+                SelectionMode="Single"
+                ItemClick="BasicGridView_ItemClick"
+                Width="Auto">
 
-            <ListView.ItemTemplate>
-                <DataTemplate x:DataType="local:FeedItem">
-                    <StackPanel>
-                        <TextBlock
-                            Text="{x:Bind Title}"
-                            Foreground="White"
-                            FontSize="14"
-                            FontWeight="Bold"
-                            Padding="0,4,8,4"/>
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="local:FeedItem">
+                        <StackPanel>
+                            <TextBlock
+                                Text="{x:Bind Title}"
+                                Foreground="White"
+                                FontSize="14"
+                                FontWeight="Bold"
+                                Padding="0,4,8,4"/>
 
-                        <TextBlock
-                            Text="{x:Bind PubDate}"
-                            Foreground="White"
-                            FontSize="12"
-                            TextWrapping="Wrap"
-                            MaxLines="1"
-                            Padding="0,4,8,4"/>
+                            <TextBlock
+                                Text="{x:Bind PubDate}"
+                                Foreground="White"
+                                FontSize="12"
+                                TextWrapping="Wrap"
+                                MaxLines="1"
+                                Padding="0,4,8,4"/>
 
-                        <TextBlock
-                            Text="{x:Bind Description}"
-                            Foreground="White"
-                            FontSize="12"
-                            TextWrapping="Wrap"
-                            MaxLines="1"
-                            Padding="0,4,8,4"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </StackPanel>
+                            <TextBlock
+                                Text="{x:Bind Description}"
+                                Foreground="White"
+                                FontSize="12"
+                                TextWrapping="Wrap"
+                                MaxLines="1"
+                                Padding="0,4,8,4"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <MediaPlayerElement
+                x:Name="mediaPlayer"
+                AutoPlay="True"
+                AreTransportControlsEnabled="True"
+                Height="100"
+                Background="Transparent"/>
+        </StackPanel>
+    </Grid>
 </Page>
