@@ -73,9 +73,7 @@ namespace SModr
                 var pathUri = new Uri(url);
                 mediaPlayer.Source = MediaSource.CreateFromUri(pathUri);
             }
-#pragma warning disable CS0168 // Variable is declared but never used
-            catch (FormatException _)
-#pragma warning restore CS0168 // Variable is declared but never used
+            catch (FormatException)
             {
                 
             }
