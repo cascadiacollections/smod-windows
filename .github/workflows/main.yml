@@ -16,5 +16,9 @@ jobs:
       - name: Add msbuild to PATH
         uses: microsoft/setup-msbuild@v1.0.2
 
-      - name: Build solution
-        run: msbuild -Restore /p:Configuration=Debug /p:Platform=x64
+      - name: Generate Test Certificate
+        run: |
+          New-SelfSignedCertificate -Type CodeSigningCert -Subject "CN=TestCertificate" -CertStoreLocation Cert:\LocalMachine\My
+
+      - name: Build solution with Test Certificate
+        run: msbuild -Restore /p:Configuration=Debug /p:Platform=x64 /p:SignTool="TestCertificate"
