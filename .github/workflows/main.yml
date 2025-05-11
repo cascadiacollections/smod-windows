@@ -19,6 +19,6 @@ jobs:
       - name: Generate Test Certificate
         run: |
           New-SelfSignedCertificate -Type CodeSigningCert -Subject "CN=TestCertificate" -CertStoreLocation Cert:\LocalMachine\My
-
-      - name: Build solution with Test Certificate
-        run: msbuild -Restore /p:Configuration=Debug /p:Platform=x64 /p:SignTool="TestCertificate"
+      
+      - name: Build solution without signing
+        run: msbuild -Restore /p:Configuration=Debug /p:Platform=x64 /p:DisableSigning=true
