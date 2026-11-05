@@ -1,3 +1,6 @@
+> [!NOTE]
+> **Archived.** This UWP app is no longer maintained. For SModcast on Android, see [smodr](https://github.com/cascadiacollections/smodr).
+
 # smodr-windows
 
 ![CI](https://github.com/cascadiacollections/smod-windows/workflows/CI/badge.svg)
